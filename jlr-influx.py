@@ -12,11 +12,9 @@ config.read('config.ini')
 
 username = config.get('jlrpy', 'email')
 password = config.get('jlrpy', 'password')
-hostname = config.get('influx', 'host')
+url = config.get('influxdb', 'url')
 verify_ssl = config.get('jlrpy', 'insecure_ssl')
-username = config.get('influx', 'user')
-password = config.get('influx', 'password')
-database = config.get('influx', 'database')
+index = config.get('influxdb', 'db')
 epoch_time = int(time.time())
 
 if verify_ssl == "True":
@@ -32,15 +30,21 @@ status = v.get_status()
 
 healthstatus = v.get_health_status()
 status = { d['key'] : d['value'] for d in v.get_status()['vehicleStatus'] }
-position = v.get_position
+position = v.get_position()
+
+json_status = status
+json_health = healthstatus
+json_position = position
 
 # Generate the JSON
 json_out = {
     "time": epoch_time,
     "index": index,
     "source": "jlrpy",
-    "event": [ {
-    "Door Positions": [
+    "event": [
+    {"Full Health": json_health},
+    {"Full Status": json_status},
+    {"Position": json_position}
+    ]
 }
-
 print(json.dumps(json_out))
