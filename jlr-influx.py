@@ -12,9 +12,11 @@ config.read('config.ini')
 
 username = config.get('jlrpy', 'email')
 password = config.get('jlrpy', 'password')
-url = config.get('influxdb', 'url')
 verify_ssl = config.get('jlrpy', 'insecure_ssl')
-index = config.get('influxdb', 'db')
+host = config.get('influxdb', 'host')
+database = config.get('influxdb', 'db')
+idbuser = config.get('influxdb', 'user')
+idbpass = config.get('influxdb', 'pass')
 epoch_time = int(time.time())
 
 if verify_ssl == "True":
