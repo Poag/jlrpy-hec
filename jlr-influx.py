@@ -73,10 +73,10 @@ def get_data():
 
     json_out = [
         {
-            "measurement": "cpu_load_short",
+            "measurement": "jlrpy-out",
             "tags": {
-                "host": "server01",
-                "region": "us-west"
+                "vechicle": "ipace",
+                "region": "eu"
             },
             "time": datetime.now(),
             "fields": fields
