@@ -62,12 +62,14 @@ def get_data():
 
     json_status = status
     json_health = healthstatus
-    json_position = position
+    json_position = dict()
+    for k in position['position']:
+        json_position['position-' + k] = position['position'][k]
 
     fields = dict()
     fields.update(json_health)
     fields.update(json_status)
-#    fields.update(json_position)
+    fields.update(json_position)
 
     json_out = [
         {
